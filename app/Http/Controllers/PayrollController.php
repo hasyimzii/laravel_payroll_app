@@ -138,8 +138,7 @@ class PayrollController extends Controller
         if (!$payroll) return back();
         
         $pdf = Pdf::loadview('payroll.printPdf', ['payroll' => $payroll]);
-	    return $pdf->stream();
-	    // return $pdf->download('laporan-payroll.pdf');
+	    return $pdf->download('laporan-payroll.pdf');
     }
 
     public function request()
