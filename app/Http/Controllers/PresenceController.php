@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Presence;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class PresenceController extends Controller
 
     public function create()
     {
-        return view('presence.create');
+        $employee = Employee::all();
+        return view('presence.create', compact('employee'));
     }
 
     public function store(Request $request)
@@ -67,13 +69,11 @@ class PresenceController extends Controller
         if (!$presence) return back();
         
         $validated = WebRequest::validator($request->all(), [
-            'employee_id' => ['required', 'integer'],
             'status' => ['required', 'string'],
         ]);
         if (!$validated) return back();
 
         $presence->update([
-            'employee_id' => $request->employee_id,
             'status' => $request->status,
         ]);
  

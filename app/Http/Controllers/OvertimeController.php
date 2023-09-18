@@ -50,7 +50,8 @@ class OvertimeController extends Controller
 
     public function create()
     {
-        return view('overtime.create');
+        $employee = Employee::all();
+        return view('overtime.create', compact('employee'));
     }
 
     public function store(Request $request)

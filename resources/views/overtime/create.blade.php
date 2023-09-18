@@ -1,24 +1,25 @@
 @extends('layouts.body')
 
-@section('title', 'Daftar Karyawan')
+@section('title', 'Tambah Lembur')
 @section('content')
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Daftar Karyawan</li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('overtime.index') }}">Daftar Lembur</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tambah Lembur</li>
+  </ol>
 </nav>
 
 <div class="row page-titles mx-0" style="background: #343957;">
     <div class="col-sm-6 my-auto p-md-0">
         <div class="welcome-text">
-            <h4 class="text-white">Daftar Karyawan</h4>
+            <h4 class="text-white">Tambah Lembur</h4>
         </div>
     </div>
-    <div class="col-sm-6 my-auto p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-        <a href="{{ route('employee.create') }}">
-            <button type="button" class="btn btn-success">
-                <i class="fas fa-plus-circle mr-1"></i> Tambah Karyawan
+    <div class="col-sm-6 my-auto p-md-0 justify-content-sm-end d-flex">
+        <a href="{{ route('overtime.index') }}">
+            <button type="button" class="btn btn-light">
+                <i class="fas fa-arrow-circle-left mr-1"></i> Kembali
             </button>
         </a>
     </div>
@@ -58,34 +59,38 @@
                                         @break
                                     @endswitch
                                     <td>
-                                        <a href="{{ route('employee.show', $item->id) }}"
-                                            class="btn btn-info">
-                                                <i class="fa fa-eye text-white"></i>
-                                        </a>
-                                        <a href="{{ route('employee.edit', $item->id) }}"
-                                            class="btn btn-warning">
-                                                <i class="fa fa-pencil text-white"></i>
-                                        </a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{ $item->id }}">
-                                            <i class="fa fa-trash"></i>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#confirmOvertime{{ $item->id }}">
+                                            <i class="fa fa-user-clock"></i>
                                         </button>
-                                        <!-- Delete Confirmation Modal -->
-                                        <div class="modal fade" id="confirmDelete{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
+                                        <!-- Overtime Confirmation Modal -->
+                                        <div class="modal fade" id="confirmOvertime{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <h1 class="text-center text-dark mt-3 mb-3"><i class="fa fa-circle-question fa-xl"></i></h1>
-                                                        <h2 class="text-center text-dark">Hapus Karyawan?</h2>
-                                                        <p class="text-center text-secondary">Apakah anda yakin ingin menghapus?</p>
-                                                        <div class="d-flex d-row justify-content-center mb-3">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <form class="d-inline ml-3" 
-                                                                action="{{ route('employee.delete', $item->id) }}" 
-                                                                method="post">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-danger">Ya, Hapus sekarang!</button>
-                                                            </form>
-                                                        </div>
+                                                        <h2 class="text-center text-dark">Tambah Lembur</h2>
+                                                        <form class="d-inline" 
+                                                            action="{{ route('overtime.store') }}" 
+                                                            method="post">
+                                                            @csrf
+                                                            <input type="text" name="employee_id" value="{{ $item->id }}" hidden required>
+                                                            <div class="form-row px-5 mx-4 mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="text-dark">Nama Karyawan</label>
+                                                                    <input type="text" class="form-control" value="{{ $item->name }}" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row px-5 mx-4 mb-3">
+                                                                <div class="col-sm-12">
+                                                                    <label class="text-dark">Total Jam</label>
+                                                                    <input type="number" class="form-control" name="hours" min="0" value="0" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex d-row justify-content-center mb-3">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-success ml-3">Tambah Lembur</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

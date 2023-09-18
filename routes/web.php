@@ -62,7 +62,6 @@ Route::middleware(StaffRole::class)->group(function () {
         Route::get('/', [PresenceController::class, 'index'])->name('index');
         Route::get('/create', [PresenceController::class, 'create'])->name('create');
         Route::post('/create', [PresenceController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [PresenceController::class, 'edit'])->name('edit');
         Route::post('/{id}/edit', [PresenceController::class, 'update'])->name('update');
         Route::post('/{id}/delete', [PresenceController::class, 'delete'])->name('delete');
     });
@@ -71,7 +70,6 @@ Route::middleware(StaffRole::class)->group(function () {
         Route::get('/', [OvertimeController::class, 'index'])->name('index');
         Route::get('/create', [OvertimeController::class, 'create'])->name('create');
         Route::post('/create', [OvertimeController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [OvertimeController::class, 'edit'])->name('edit');
         Route::post('/{id}/edit', [OvertimeController::class, 'update'])->name('update');
         Route::post('/{id}/delete', [OvertimeController::class, 'delete'])->name('delete');
     });
