@@ -46,7 +46,7 @@
                                     <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat('ddd, DD MMM YYYY') }}</td>
                                     <td>{{ $item->employee->name }}</td>
                                     <td>{{ $item->hours }} jam</td>
-                                    <td>Rp {{ $item->total_salary }}</td>
+                                    <td>Rp {{ number_format($item->total_salary) }}</td>
                                     <td>
                                         <!-- Update -->
                                         <button class="btn btn-warning text-white" data-toggle="modal" data-target="#confirmUpdate{{ $item->id }}">

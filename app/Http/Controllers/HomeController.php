@@ -13,7 +13,7 @@ class HomeController extends Controller
         $user = Auth::user();
 
         if ($user->hasRole('supervisor')) {
-            return to_route('user.index'); // TODO: ganti ke payroll
+            return to_route('payroll.request');
         } else if ($user->hasRole('staff')) {
             return to_route('employee.index');
         } else {

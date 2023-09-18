@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PayrollController extends Controller
 {
@@ -34,23 +35,23 @@ class PayrollController extends Controller
 
     private function countOvertime($firstdate, $lastdate, $employee_id)
     {
-        return Overtime::whereBetween('created_at', [$firstdate, $lastdate])->sum('total_salary');
+        return Overtime::whereBetween('created_at', [$firstdate, $lastdate])->where('employee_id', $employee_id)->sum('total_salary');
     }
 
-    private function countNwnp($firstdate, $lastdate, $basic_salary)
+    private function countNwnp($firstdate, $lastdate, $employee)
     {
         $total_workdays = $firstdate->diffInDaysFiltered(function(Carbon $date) {
-        return $date->isWeekend();
+            return $date->isWeekday();
         }, $lastdate);
 
-        $total_presence = Presence::whereBetween('created_at', [$firstdate, $lastdate])->count();
+        $total_presence = Presence::whereBetween('created_at', [$firstdate, $lastdate])->where('employee_id', $employee->id)->count();
 
-        return ($total_workdays - $total_presence) * $basic_salary / 30;
+        return round(($total_workdays - $total_presence) * $employee->basic_salary / 30);
     }
 
     private function countInsurance($firstdate, $lastdate, $employee_id)
     {
-        return Insurance::whereBetween('created_at', [$firstdate, $lastdate])->sum('total_fee');
+        return Insurance::whereBetween('created_at', [$firstdate, $lastdate])->where('employee_id', $employee_id)->sum('total_fee');
     }
 
     public function index()
@@ -70,8 +71,14 @@ class PayrollController extends Controller
     public function selectEmployee()
     {
         $employee = Employee::all();
-        // TODO: nanti disini kasih input month (isinya first date)
-        return view('payroll.selectEmployee', compact('employee'));
+
+        $month = [];
+        for ($m = 1; $m <= 12; $m++) {
+            $month[$m - 1]['date'] = date('Y-m-d H:i:s', mktime(0,0,0,$m, 1, date('Y')));
+            $month[$m - 1]['name'] = date('F', mktime(0,0,0,$m, 1, date('Y')));
+        }
+
+        return view('payroll.selectEmployee', compact('employee', 'month'));
     }
 
     public function create(Request $request, $id)
@@ -83,12 +90,11 @@ class PayrollController extends Controller
         }
 
         $firstdate = Carbon::parse($request->firstdate);
-        $lastdate = $firstdate->endOfMonth();
-        dd($firstdate, $lastdate); // FIXME: check month interval
+        $lastdate = Carbon::parse($request->firstdate)->endOfMonth();
 
         $incentive = $this->countIncentive($lastdate, $employee->start_date);
         $overtime = $this->countOvertime($firstdate, $lastdate, $id);
-        $nwnp = $this->countNwnp($firstdate, $lastdate, $employee->basic_salary);
+        $nwnp = $this->countNwnp($firstdate, $lastdate, $employee);
         $insurance = $this->countInsurance($firstdate, $lastdate, $id);
 
         $total_payroll = $employee->basic_salary + $employee->allowance + $incentive + $overtime - $nwnp - $insurance;
@@ -126,10 +132,20 @@ class PayrollController extends Controller
         return to_route('payroll.index');
     }
 
+    public function printPdf($id)
+    {
+        $payroll = $this->checkId($id);
+        if (!$payroll) return back();
+        
+        $pdf = Pdf::loadview('payroll.printPdf', ['payroll' => $payroll]);
+	    return $pdf->stream();
+	    // return $pdf->download('laporan-payroll.pdf');
+    }
+
     public function request()
     {
         $payroll = Payroll::latest()->get();
-        return view('payroll.request', compact('payroll'));
+        return view('payroll.request', compact('struk-payroll'));
     }
 
     public function showRequest($id)

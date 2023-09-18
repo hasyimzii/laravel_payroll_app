@@ -58,14 +58,17 @@
                                         @break
                                     @endswitch
                                     <td>
+                                        <!-- Show -->
                                         <a href="{{ route('employee.show', $item->id) }}"
                                             class="btn btn-info">
                                                 <i class="fa fa-eye text-white"></i>
                                         </a>
+                                        <!-- Update -->
                                         <a href="{{ route('employee.edit', $item->id) }}"
                                             class="btn btn-warning">
                                                 <i class="fa fa-pencil text-white"></i>
                                         </a>
+                                        <!-- Delete -->
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{ $item->id }}">
                                             <i class="fa fa-trash"></i>
                                         </button>

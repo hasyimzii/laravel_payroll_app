@@ -44,7 +44,7 @@
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($item->created_at)->isoFormat('ddd, DD MMM YYYY') }}</td>
                                     <td>{{ $item->employee->name }}</td>
-                                    <td>Rp {{ $item->total_fee }}</td>
+                                    <td>Rp {{ number_format($item->total_fee) }}</td>
                                     <td>
                                         <!-- Delete -->
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete{{ $item->id }}">

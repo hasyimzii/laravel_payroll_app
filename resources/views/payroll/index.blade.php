@@ -1,24 +1,24 @@
 @extends('layouts.body')
 
-@section('title', 'Daftar User')
+@section('title', 'Daftar Payroll')
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Daftar User</li>
+        <li class="breadcrumb-item active" aria-current="page">Daftar Payroll</li>
     </ol>
 </nav>
 
 <div class="row page-titles mx-0" style="background: #343957;">
     <div class="col-sm-6 my-auto p-md-0">
         <div class="welcome-text">
-            <h4 class="text-white">Daftar User</h4>
+            <h4 class="text-white">Daftar Payroll</h4>
         </div>
     </div>
     <div class="col-sm-6 my-auto p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-        <a href="{{ route('user.create') }}">
+        <a href="{{ route('payroll.selectEmployee') }}">
             <button type="button" class="btn btn-success">
-                <i class="fas fa-plus-circle mr-1"></i> Tambah User
+                <i class="fas fa-plus-circle mr-1"></i> Tambah Payroll
             </button>
         </a>
     </div>
@@ -33,28 +33,34 @@
                     <table id="example" class="display text-muted" style="min-width: 845px">
                         <thead>
                             <tr>
-                                <th>Nama</th>
-                                <th>Username</th>
-                                <th>Role</th>
+                                <th>Tanggal</th>
+                                <th>Nama Karyawan</th>
+                                <th>Total Payroll</th>
+                                <th>Staff User</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($user as $item)
+                            @forelse($payroll as $item)
                                 <tr>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->username }}</td>
-                                    <td>{{ $item->role->name }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->payroll_date)->isoFormat('ddd, DD MMM YYYY') }}</td>
+                                    <td>{{ $item->employee->name }}</td>
+                                    <td>Rp {{ number_format($item->totalPayroll()) }}</td>
+                                    <td>{{ $item->user->name }}</td>
+                                    @switch ($item->status)
+                                        @case ('approved')
+                                        <td><span class="badge badge-success">Approved</span></td>
+                                        @break
+                                        @case ('draft')
+                                        <td><span class="badge badge-warning">Draft</span></td>
+                                        @break
+                                    @endswitch
                                     <td>
-                                        <!-- Update -->
-                                        <a href="{{ route('user.edit', $item->id) }}"
-                                            class="btn btn-warning">
-                                                <i class="fa fa-pencil text-white"></i>
-                                        </a>
-                                        <!-- Edit Password -->
-                                        <a href="{{ route('user.editPassword', $item->id) }}"
-                                            class="btn btn-secondary">
-                                                <i class="fa fa-unlock-alt"></i>
+                                        <!-- Show -->
+                                        <a href="{{ route('payroll.show', $item->id) }}"
+                                            class="btn btn-info">
+                                                <i class="fa fa-eye text-white"></i>
                                         </a>
                                     </td>
                                 </tr>

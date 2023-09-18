@@ -86,8 +86,7 @@ Route::middleware(StaffRole::class)->group(function () {
         Route::get('/{id}/show', [PayrollController::class, 'show'])->name('show');
         Route::get('/selectEmployee', [PayrollController::class, 'selectEmployee'])->name('selectEmployee');
         Route::get('/{id}/create', [PayrollController::class, 'create'])->name('create');
-        Route::post('/{id}/store', [PayrollController::class, 'store'])->name('store');
+        Route::post('/store', [PayrollController::class, 'store'])->name('store');
+        Route::get('/{id}/printPdf', [PayrollController::class, 'printPdf'])->name('printPdf');
     });
-
-    // TODO: export PDF
 });

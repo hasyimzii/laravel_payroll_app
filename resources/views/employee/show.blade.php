@@ -76,13 +76,13 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Gaji Pokok</label>
                             <div class="col-sm-9">
-                                <input type="text" readonly class="form-control-plaintext" value="Rp {{ $employee->basic_salary }}">
+                                <input type="text" readonly class="form-control-plaintext" value="Rp {{ number_format($employee->basic_salary) }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tunjangan Tetap</label>
                             <div class="col-sm-9">
-                                <input type="text" readonly class="form-control-plaintext" value="Rp {{ $employee->allowance }}">
+                                <input type="text" readonly class="form-control-plaintext" value="Rp {{ number_format($employee->allowance) }}">
                             </div>
                         </div>
                         <div class="form-group row">
