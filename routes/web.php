@@ -10,6 +10,7 @@ use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\StaffRole;
 use App\Http\Middleware\SupervisorRole;
+use App\Http\Middleware\WebMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::middleware(WebMiddleware::class)->get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');

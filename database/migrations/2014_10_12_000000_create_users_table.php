@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('role_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name', 30);
             $table->string('username', 20)->unique('user_username');
-            $table->string('password', 20);
+            $table->string('password');
             $table->timestamps();
         });
     }
