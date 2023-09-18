@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('overtimes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
-            $table->integer('hours', 3);
-            $table->integer('total_salary', 10);
+            $table->integer('hours');
+            $table->integer('total_salary');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Models\Payroll;
 use App\Models\Presence;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PayrollController extends Controller
@@ -96,60 +97,59 @@ class PayrollController extends Controller
 
     public function store(Request $request)
     {
-        // TODO: isi store
         $validated = WebRequest::validator($request->all(), [
             'employee_id' => ['required', 'integer'],
+            'basic_salary' => ['required', 'integer'],
+            'allowance' => ['required', 'integer'],
+            'incentive' => ['required', 'integer'],
+            'overtime' => ['required', 'integer'],
+            'nwnp' => ['required', 'integer'],
+            'insurance' => ['required', 'integer'],
+            'payroll_date' => ['required', 'date'],
         ]);
         if (!$validated) return back();
 
-        $employee = Employee::find($request->employee_id);
-        if (is_null($employee)) {
-            Alert::toast('Data karyawan tidak ditemukan!', 'error');
-            return back();
-        }
+        Payroll::create([
+            'employee_id' => $request->employee_id,
+            'user_id' => Auth::user()->id,
+            'basic_salary' => $request->basic_salary,
+            'allowance' => $request->allowance,
+            'incentive' => $request->incentive,
+            'overtime' => $request->overtime,
+            'nwnp' => $request->nwnp,
+            'insurance' => $request->insurance,
+            'status' => 'draft',
+            'payroll_date' => $request->payroll_date,
+        ]);
+ 
+        Alert::toast('Berhasil menambah data payroll!', 'success');
+        return to_route('payroll.index');
+    }
+
+    public function request()
+    {
+        $payroll = Payroll::latest()->get();
+        return view('payroll.request', compact('payroll'));
+    }
+
+    public function showRequest($id)
+    {
+        $payroll = $this->checkId($id);
+        if (!$payroll) return back();
         
-        // $total_fee = round($this->countInsurance($employee));
-
-        // Insurance::create([
-        //     'employee_id' => $request->employee_id,
-        //     'total_fee' => $total_fee,
-        // ]);
- 
-        Alert::toast('Berhasil menambah data BPJS!', 'success');
-        return to_route('insurance.index');
-    }
-    
-    public function edit($id)
-    {
-        $insurance = $this->checkId($id);
-        if (!$insurance) return back();
-
-        return view('insurance.edit', compact('insurance'));
+        return view('payroll.showRequest', compact('payroll'));
     }
 
-    public function update(Request $request, $id)
+    public function updateRequest($id)
     {
-        $insurance = $this->checkId($id);
-        if (!$insurance) return back();
+        $payroll = $this->checkId($id);
+        if (!$payroll) return back();
 
-        // $total_fee = $this->countOvertime($insurance->employee());
-
-        // $insurance->update([
-        //     'total_fee' => $total_fee,
-        // ]);
- 
-        Alert::toast('Berhasil mengubah data BPJS!', 'success');
-        return to_route('insurance.index');
-    }
-
-    public function delete($id)
-    {
-        $insurance = $this->checkId($id);
-        if (!$insurance) return back();
-
-        $insurance->delete();
-
-        Alert::toast('Berhasil menghapus data BPJS!', 'success');
+        $payroll->update([
+            'status' => ($payroll->status == 'draft') ? 'approved' : 'draft',
+        ]);
+        
+        Alert::toast('Berhasil mengubah data payroll!', 'success');
         return back();
     }
 }

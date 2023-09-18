@@ -17,14 +17,14 @@ class OvertimeSeeder extends Seeder
             'employee_id' => 1,
             'hours' => 4,
             'total_salary' => 161850,
-            'created_at' => '2023-08-01',
+            'created_at' => '2023-08-01 08:00:00',
         ]);
 
         Overtime::create([
             'employee_id' => 2,
             'hours' => 6,
             'total_salary' => 184971,
-            'created_at' => '2023-08-02',
+            'created_at' => '2023-08-02 08:00:00',
         ]);
     }
 }

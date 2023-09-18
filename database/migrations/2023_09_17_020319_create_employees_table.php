@@ -19,8 +19,8 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('position', 20);
             $table->enum('status', ['fulltime', 'contract', 'freelance']);
-            $table->integer('basic_salary', 10);
-            $table->integer('allowance', 10);
+            $table->integer('basic_salary');
+            $table->integer('allowance');
             $table->date('start_date');
         });
     }

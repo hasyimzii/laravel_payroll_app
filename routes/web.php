@@ -90,9 +90,6 @@ Route::middleware(StaffRole::class)->group(function () {
         Route::get('/selectEmployee', [PayrollController::class, 'selectEmployee'])->name('selectEmployee');
         Route::get('/{id}/create', [PayrollController::class, 'create'])->name('create');
         Route::post('/{id}/store', [PayrollController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [PayrollController::class, 'edit'])->name('edit');
-        Route::post('/{id}/update', [PayrollController::class, 'update'])->name('update');
-        Route::post('/{id}/delete', [PayrollController::class, 'delete'])->name('delete');
     });
 
     // TODO: export PDF

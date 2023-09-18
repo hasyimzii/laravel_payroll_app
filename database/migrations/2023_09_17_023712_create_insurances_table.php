@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->nullable()->constrained()->nullOnDelete();
-            $table->integer('total_fee', 10);
+            $table->integer('total_fee');
             $table->timestamps();
         });
     }

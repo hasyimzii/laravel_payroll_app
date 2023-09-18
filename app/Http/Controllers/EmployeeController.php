@@ -50,8 +50,8 @@ class EmployeeController extends Controller
             'gender' => ['required', 'string'],
             'position' => ['required', 'string', 'max:20'],
             'status' => ['required', 'string'],
-            'basic_salary' => ['required', 'integer', 'max_digits:10'],
-            'allowance' => ['required', 'integer', 'max_digits:10'],
+            'basic_salary' => ['required', 'integer'],
+            'allowance' => ['required', 'integer'],
             'start_date' => ['required', 'date'],
         ]);
         if (!$validated) return back();
@@ -92,8 +92,8 @@ class EmployeeController extends Controller
             'gender' => ['required', 'string'],
             'position' => ['required', 'string', 'max:20'],
             'status' => ['required', 'string'],
-            'basic_salary' => ['required', 'integer', 'max_digits:10'],
-            'allowance' => ['required', 'integer', 'max_digits:10'],
+            'basic_salary' => ['required', 'integer'],
+            'allowance' => ['required', 'integer'],
             'start_date' => ['required', 'date'],
         ]);
         if (!$validated) return back();

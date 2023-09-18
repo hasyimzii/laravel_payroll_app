@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presence;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -36,6 +37,12 @@ class PresenceController extends Controller
             'status' => ['required', 'string'],
         ]);
         if (!$validated) return back();
+
+        $presence = Presence::whereDate('created_at', Carbon::today())->first();
+        if (isset($presence)) {
+            Alert::toast('Karyawan sudah melakukan presensi hari ini!', 'error');
+            return back();
+        }
 
         Presence::create([
             'employee_id' => $request->employee_id,

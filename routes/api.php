@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PresenceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// TODO: API presence
+Route::get('/employee', [PresenceController::class, 'employee']);
+Route::post('/presence', [PresenceController::class, 'presence']);

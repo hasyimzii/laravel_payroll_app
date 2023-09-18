@@ -57,7 +57,7 @@ class OvertimeController extends Controller
     {
         $validated = WebRequest::validator($request->all(), [
             'employee_id' => ['required', 'integer'],
-            'hours' => ['required', 'integer', 'max_digits:3'],
+            'hours' => ['required', 'integer'],
         ]);
         if (!$validated) return back();
 
@@ -94,7 +94,7 @@ class OvertimeController extends Controller
         if (!$overtime) return back();
         
         $validated = WebRequest::validator($request->all(), [
-            'hours' => $request->hours,
+            'hours' => ['required', 'integer'],
         ]);
         if (!$validated) return back();
 
