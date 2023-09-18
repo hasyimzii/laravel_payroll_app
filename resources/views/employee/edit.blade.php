@@ -4,7 +4,7 @@
 @section('content')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('employee.index') }}">Daftar Karyawan</a></li>
     <li class="breadcrumb-item active" aria-current="page">Ubah Karyawan</li>
   </ol>
@@ -19,7 +19,7 @@
     <div class="col-sm-6 my-auto p-md-0 justify-content-sm-end d-flex">
         <a href="{{ route('employee.index') }}">
             <button type="button" class="btn btn-light">
-                <i class="fas fa-arrow-circle-left mr-1"></i> Back
+                <i class="fas fa-arrow-circle-left mr-1"></i> Kembali
             </button>
         </a>
     </div>

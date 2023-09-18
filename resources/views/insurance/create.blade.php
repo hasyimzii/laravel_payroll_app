@@ -1,23 +1,23 @@
 @extends('layouts.body')
 
-@section('title', 'Tambah Presensi')
+@section('title', 'Tambah BPJS')
 @section('content')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('presence.index') }}">Daftar Presensi</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Tambah Presensi</li>
+    <li class="breadcrumb-item"><a href="{{ route('insurance.index') }}">Daftar BPJS</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tambah BPJS</li>
   </ol>
 </nav>
 
 <div class="row page-titles mx-0" style="background: #343957;">
     <div class="col-sm-6 my-auto p-md-0">
         <div class="welcome-text">
-            <h4 class="text-white">Tambah Presensi</h4>
+            <h4 class="text-white">Tambah BPJS</h4>
         </div>
     </div>
     <div class="col-sm-6 my-auto p-md-0 justify-content-sm-end d-flex">
-        <a href="{{ route('presence.index') }}">
+        <a href="{{ route('insurance.index') }}">
             <button type="button" class="btn btn-light">
                 <i class="fas fa-arrow-circle-left mr-1"></i> Kembali
             </button>
@@ -61,7 +61,7 @@
                                     <td>
                                         <!-- Create -->
                                         <button class="btn btn-success" data-toggle="modal" data-target="#confirmCreate{{ $item->id }}">
-                                            <i class="fa fa-user-check"></i>
+                                            <i class="fa fa-hospital-user"></i>
                                         </button>
                                         <!-- Create Confirmation Modal -->
                                         <div class="modal fade" id="confirmCreate{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
@@ -69,28 +69,22 @@
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <h1 class="text-center text-dark mt-3 mb-3"><i class="fa fa-circle-question fa-xl"></i></h1>
-                                                        <h2 class="text-center text-dark">Tambah Presensi</h2>
+                                                        <h2 class="text-center text-dark">Tambah BPJS</h2>
+                                                        <p class="text-center text-secondary">Apakah anda yakin ingin menambah BPJS bulan ini?</p>
                                                         <form class="d-inline" 
-                                                            action="{{ route('presence.store') }}" 
+                                                            action="{{ route('insurance.store') }}" 
                                                             method="post">
                                                             @csrf
                                                             <input type="text" name="employee_id" value="{{ $item->id }}" hidden required>
-                                                            <div class="form-row px-5 mx-4 mb-3">
+                                                            <div class="form-row px-5 mx-4 mb-4">
                                                                 <div class="col-sm-12">
                                                                     <label class="text-dark">Nama Karyawan</label>
                                                                     <input type="text" class="form-control" value="{{ $item->name }}" disabled>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group px-5 mx-4 mb-4">
-                                                                <label class="text-dark">Status</label>
-                                                                <select class="form-select" id="sel1" name="status">
-                                                                    <option value="present">Masuk</option>
-                                                                    <option value="leave">Cuti</option>
-                                                                </select>
-                                                            </div>
                                                             <div class="d-flex d-row justify-content-center mb-3">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-success ml-3">Tambah presensi</button>
+                                                                <button type="submit" class="btn btn-success ml-3">Ya, Tambah BPJS</button>
                                                             </div>
                                                         </form>
                                                     </div>

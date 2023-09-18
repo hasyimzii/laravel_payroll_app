@@ -32,7 +32,8 @@ class InsuranceController extends Controller
 
     public function create()
     {
-        return view('insurance.create');
+        $employee = Employee::all();
+        return view('insurance.create', compact('employee'));
     }
 
     public function store(Request $request)
@@ -56,29 +57,6 @@ class InsuranceController extends Controller
         ]);
  
         Alert::toast('Berhasil menambah data BPJS!', 'success');
-        return to_route('insurance.index');
-    }
-    
-    public function edit($id)
-    {
-        $insurance = $this->checkId($id);
-        if (!$insurance) return back();
-
-        return view('insurance.edit', compact('insurance'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $insurance = $this->checkId($id);
-        if (!$insurance) return back();
-
-        $total_fee = $this->countOvertime($insurance->employee());
-
-        $insurance->update([
-            'total_fee' => $total_fee,
-        ]);
- 
-        Alert::toast('Berhasil mengubah data BPJS!', 'success');
         return to_route('insurance.index');
     }
 

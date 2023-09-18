@@ -19,12 +19,12 @@ class PresenceController extends Controller
             $data = [];
             foreach ($employee as $item) {
                 $data[] = [
-                    'id' => $employee->id,
-                    'name' => $employee->name,
-                    'gender' => $employee->gender,
-                    'position' => $employee->position,
-                    'status' => $employee->status,
-                    'start_date' => $employee->start_date,
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'gender' => $item->gender,
+                    'position' => $item->position,
+                    'status' => $item->status,
+                    'start_date' => $item->start_date,
                 ];
             }
 

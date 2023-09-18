@@ -4,7 +4,7 @@
 @section('content')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('overtime.index') }}">Daftar Lembur</a></li>
     <li class="breadcrumb-item active" aria-current="page">Tambah Lembur</li>
   </ol>
@@ -59,11 +59,12 @@
                                         @break
                                     @endswitch
                                     <td>
-                                        <button class="btn btn-success" data-toggle="modal" data-target="#confirmOvertime{{ $item->id }}">
+                                        <!-- Create -->
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#confirmCreate{{ $item->id }}">
                                             <i class="fa fa-user-clock"></i>
                                         </button>
-                                        <!-- Overtime Confirmation Modal -->
-                                        <div class="modal fade" id="confirmOvertime{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
+                                        <!-- Create Confirmation Modal -->
+                                        <div class="modal fade" id="confirmCreate{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="confirmation" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">

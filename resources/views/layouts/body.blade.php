@@ -29,8 +29,7 @@
         Nav header start
     ***********************************-->
     <div class="nav-header">
-        <a href="{{ route('index') }}" class="brand-logo">
-            <!-- <img class="logo-abbr" src="{{ asset('assets/img/logo/himasif2020.png') }}" width="50" alt=""> -->
+        <a href="{{ route('home') }}" class="brand-logo">
             <h3 class="logo-abbr my-auto mr-0 text-white">P</h3>
             <h3 class="brand-title my-auto ml-0 text-white">ayroll</h3>
         </a>

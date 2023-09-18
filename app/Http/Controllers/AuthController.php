@@ -26,11 +26,11 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('username', 'password'), $remember)) {
             $request->session()->regenerate();
 
-            Alert::toast('Welcome to dashboard, '. Auth::user()->name .'!', 'success');
-            return to_route('index');
+            Alert::toast('Selamat datang di dashboard, '. Auth::user()->name .'!', 'success');
+            return to_route('home');
         }
         
-        Alert::toast('Wrong email or password!', 'error');
+        Alert::toast('Email atau password salah!', 'error');
         return back();
     }
 

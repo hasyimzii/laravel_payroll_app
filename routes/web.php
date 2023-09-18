@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware(WebMiddleware::class)->get('/', [HomeController::class, 'index'])->name('index');
+Route::middleware(WebMiddleware::class)->get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
@@ -78,8 +78,6 @@ Route::middleware(StaffRole::class)->group(function () {
         Route::get('/', [InsuranceController::class, 'index'])->name('index');
         Route::get('/create', [InsuranceController::class, 'create'])->name('create');
         Route::post('/create', [InsuranceController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [InsuranceController::class, 'edit'])->name('edit');
-        Route::post('/{id}/edit', [InsuranceController::class, 'update'])->name('update');
         Route::post('/{id}/delete', [InsuranceController::class, 'delete'])->name('delete');
     });
 
