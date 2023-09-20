@@ -43,6 +43,13 @@ class PresenceController extends Controller
             return response()->json($validator->errors()->all(), 400);
         }
 
+        $employee = Employee::find($request->employee_id);
+        if (is_null($employee)) {
+            return response()->json([
+                'message' => 'Data karyawan tidak ditemukan!'
+            ], 404);
+        }
+
         $presence = Presence::whereDate('created_at', Carbon::today())->first();
         if (isset($presence)) {
             return response()->json([
