@@ -1,8 +1,10 @@
-# GET http://127.0.0.1:8000/api/employee HTTP/1.1
+### Get Employee
+GET http://127.0.0.1:8000/api/employee
 
-# POST http://127.0.0.1:8000/api/presence HTTP/1.1
-# content-type: application/json
+### Post Presence
+POST http://127.0.0.1:8000/api/presence
+content-type: application/json
 
-# {
-#     "employee_id": 1
-# }
+{
+    "employee_id": 20
+}

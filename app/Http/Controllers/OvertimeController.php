@@ -99,7 +99,7 @@ class OvertimeController extends Controller
         ]);
         if (!$validated) return back();
 
-        $total_salary = $this->countOvertime($overtime->employee(), $request->hours);
+        $total_salary = $this->countOvertime($overtime->employee, $request->hours);
         if (!$total_salary) return back();
 
         $overtime->update([

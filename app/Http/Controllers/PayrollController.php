@@ -74,7 +74,7 @@ class PayrollController extends Controller
 
         $month = [];
         for ($m = 1; $m <= 12; $m++) {
-            $month[$m - 1]['date'] = date('Y-m-d H:i:s', mktime(0,0,0,$m, 1, date('Y')));
+            $month[$m - 1]['date'] = date('Y-m-d', mktime(0,0,0,$m, 1, date('Y')));
             $month[$m - 1]['name'] = date('F', mktime(0,0,0,$m, 1, date('Y')));
         }
 
@@ -111,7 +111,7 @@ class PayrollController extends Controller
             'overtime' => ['required', 'integer'],
             'nwnp' => ['required', 'integer'],
             'insurance' => ['required', 'integer'],
-            'payroll_date' => ['required', 'date'],
+            'payroll_date' => ['required', 'date'], 
         ]);
         if (!$validated) return back();
 

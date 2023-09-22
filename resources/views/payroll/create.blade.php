@@ -38,7 +38,7 @@
                         <div class="form-row mb-3">
                             <div class="col-sm-12">
                                 <label>Nama Karyawan</label>
-                                <input type="text" class="form-control" value="{{ $employee->name }}" disabled required>
+                                <input type="text" class="form-control" value="{{ $employee->name }}" readonly required>
                             </div>
                         </div>
                         <div class="form-row mb-3">
@@ -48,7 +48,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" name="basic_salary" value="{{ $employee->basic_salary }}" disabled required>
+                                    <input type="number" class="form-control" name="basic_salary" value="{{ $employee->basic_salary }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" name="allowance" value="{{ $employee->allowance }}" disabled required>
+                                    <input type="number" class="form-control" name="allowance" value="{{ $employee->allowance }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" name="incentive" value="{{ $incentive }}" disabled required>
+                                    <input type="number" class="form-control" name="incentive" value="{{ $incentive }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" name="overtime" value="{{ $overtime }}" disabled required>
+                                    <input type="number" class="form-control" name="overtime" value="{{ $overtime }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" name="nwnp" value="{{ $nwnp }}" disabled required>
+                                    <input type="number" class="form-control" name="nwnp" value="{{ $nwnp }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" name="insurance" value="{{ $insurance }}" disabled required>
+                                    <input type="number" class="form-control" name="insurance" value="{{ $insurance }}" readonly required>
                                 </div>
                             </div>
                         </div>
@@ -114,14 +114,14 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input type="number" class="form-control" value="{{ $total_payroll }}" disabled required>
+                                    <input type="number" class="form-control" value="{{ $total_payroll }}" readonly required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row mb-3">
                             <div class="col-sm-12">
                                 <label>Tanggal Payroll</label>
-                                <input type="date" class="form-control" name="payroll_date" value="{{ $lastdate }}" disabled required>
+                                <input type="date" class="form-control" name="payroll_date" value="{{ date_format($lastdate, 'Y-m-d') }}" readonly required>
                             </div>
                         </div>
 
